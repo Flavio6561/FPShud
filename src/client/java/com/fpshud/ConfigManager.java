@@ -12,30 +12,40 @@ public class ConfigManager {
     private static final Path configPath = FabricLoader.getInstance().getConfigDir().resolve("FPShud.json");
 
     private static class Config {
-        int pollingRate;
-        int mainUpdateInterval;
-        int avrUpdateInterval;
-        int maxUpdateInterval;
-        int minUpdateInterval;
         boolean toggleHUD;
         int xPos;
         int yPos;
         int textColor;
         boolean shadow;
-        int precision;
+        int pollingRate;
+
         boolean showFps;
-        boolean showAvr;
-        boolean showMax;
-        boolean showMin;
+        int fpsPosition;
+        int fpsPrecision;
         String beforeFps;
         String afterFps;
+        int mainUpdateInterval;
+
+        boolean showAvr;
+        int avrPosition;
+        int avrPrecision;
         String beforeAvr;
         String afterAvr;
+        int avrUpdateInterval;
+
+        boolean showMax;
+        int maxPosition;
+        int maxPrecision;
         String beforeMax;
         String afterMax;
+        int maxUpdateInterval;
+
+        boolean showMin;
+        int minPosition;
+        int minPrecision;
         String beforeMin;
         String afterMin;
-        String separator;
+        int minUpdateInterval;
     }
 
     public static void loadConfig() {
@@ -56,88 +66,123 @@ public class ConfigManager {
 
     private static void restoreDefaultConfig() {
         config = new Config();
-        config.pollingRate = FPShudClient.getPollingRate();
-        config.mainUpdateInterval = FPShudClient.getMainUpdateInterval();
-        config.avrUpdateInterval = FPShudClient.getAvrUpdateInterval();
-        config.maxUpdateInterval = FPShudClient.getMaxUpdateInterval();
-        config.minUpdateInterval = FPShudClient.getMinUpdateInterval();
-        config.toggleHUD = FPShudClient.isToggleHUD();
-        config.xPos = FPShudClient.getXPos();
-        config.yPos = FPShudClient.getYPos();
-        config.textColor = FPShudClient.getTextColor();
-        config.shadow = FPShudClient.isShadow();
-        config.precision = FPShudClient.getPrecision();
-        config.showFps = FPShudClient.isShowFps();
-        config.showAvr = FPShudClient.isShowAvr();
-        config.showMax = FPShudClient.isShowMax();
-        config.showMin = FPShudClient.isShowMin();
-        config.beforeFps = FPShudClient.getBeforeFps();
-        config.afterFps = FPShudClient.getAfterFps();
-        config.beforeAvr = FPShudClient.getBeforeAvr();
-        config.afterAvr = FPShudClient.getAfterAvr();
-        config.beforeMax = FPShudClient.getBeforeMax();
-        config.afterMax = FPShudClient.getAfterMax();
-        config.beforeMin = FPShudClient.getBeforeMin();
-        config.afterMin = FPShudClient.getAfterMin();
-        config.separator = FPShudClient.getSeparator();
+
+        config.toggleHUD = FPShudClient.toggleHUD;
+        config.xPos = FPShudClient.xPos;
+        config.yPos = FPShudClient.yPos;
+        config.textColor = FPShudClient.textColor;
+        config.shadow = FPShudClient.shadow;
+        config.pollingRate = FPShudClient.pollingRate;
+
+        config.showFps = FPShudClient.showFps;
+        config.fpsPosition = FPShudClient.fpsPosition;
+        config.fpsPrecision = FPShudClient.fpsPrecision;
+        config.beforeFps = FPShudClient.beforeFps;
+        config.afterFps = FPShudClient.afterFps;
+        config.mainUpdateInterval = FPShudClient.mainUpdateInterval;
+
+        config.showAvr = FPShudClient.showAvr;
+        config.avrPosition = FPShudClient.avrPosition;
+        config.avrPrecision = FPShudClient.avrPrecision;
+        config.beforeAvr = FPShudClient.beforeAvr;
+        config.afterAvr = FPShudClient.afterAvr;
+        config.avrUpdateInterval = FPShudClient.avrUpdateInterval;
+
+        config.showMax = FPShudClient.showMax;
+        config.maxPosition = FPShudClient.maxPosition;
+        config.maxPrecision = FPShudClient.maxPrecision;
+        config.beforeMax = FPShudClient.beforeMax;
+        config.afterMax = FPShudClient.afterMax;
+        config.maxUpdateInterval = FPShudClient.maxUpdateInterval;
+
+        config.showMin = FPShudClient.showMin;
+        config.minPosition = FPShudClient.minPosition;
+        config.minPrecision = FPShudClient.minPrecision;
+        config.beforeMin = FPShudClient.beforeMin;
+        config.afterMin = FPShudClient.afterMin;
+        config.minUpdateInterval = FPShudClient.minUpdateInterval;
+
         saveConfig();
     }
 
     private static void applyConfig() {
-        FPShudClient.setPollingRate(config.pollingRate);
-        FPShudClient.setMainUpdateInterval(config.mainUpdateInterval);
-        FPShudClient.setAvrUpdateInterval(config.avrUpdateInterval);
-        FPShudClient.setMaxUpdateInterval(config.maxUpdateInterval);
-        FPShudClient.setMinUpdateInterval(config.minUpdateInterval);
-        FPShudClient.setToggleHUD(config.toggleHUD);
-        FPShudClient.setXPos(config.xPos);
-        FPShudClient.setYPos(config.yPos);
-        FPShudClient.setTextColor(config.textColor);
-        FPShudClient.setShadow(config.shadow);
-        FPShudClient.setPrecision(config.precision);
-        FPShudClient.setShowFps(config.showFps);
-        FPShudClient.setShowAvr(config.showAvr);
-        FPShudClient.setShowMax(config.showMax);
-        FPShudClient.setShowMin(config.showMin);
-        FPShudClient.setBeforeFps(config.beforeFps);
-        FPShudClient.setAfterFps(config.afterFps);
-        FPShudClient.setBeforeAvr(config.beforeAvr);
-        FPShudClient.setAfterAvr(config.afterAvr);
-        FPShudClient.setBeforeMax(config.beforeMax);
-        FPShudClient.setAfterMax(config.afterMax);
-        FPShudClient.setBeforeMin(config.beforeMin);
-        FPShudClient.setAfterMin(config.afterMin);
-        FPShudClient.setSeparator(config.separator);
+        FPShudClient.toggleHUD = config.toggleHUD;
+        FPShudClient.xPos = config.xPos;
+        FPShudClient.yPos = config.yPos;
+        FPShudClient.textColor = config.textColor;
+        FPShudClient.shadow = config.shadow;
+        FPShudClient.pollingRate = config.pollingRate;
+
+        FPShudClient.showFps = config.showFps;
+        FPShudClient.fpsPosition = config.fpsPosition;
+        FPShudClient.fpsPrecision = config.fpsPrecision;
+        FPShudClient.beforeFps = config.beforeFps;
+        FPShudClient.afterFps = config.afterFps;
+        FPShudClient.mainUpdateInterval = config.mainUpdateInterval;
+
+        FPShudClient.showAvr = config.showAvr;
+        FPShudClient.avrPosition = config.avrPosition;
+        FPShudClient.avrPrecision = config.avrPrecision;
+        FPShudClient.beforeAvr = config.beforeAvr;
+        FPShudClient.afterAvr = config.afterAvr;
+        FPShudClient.avrUpdateInterval = config.avrUpdateInterval;
+
+        FPShudClient.showMax = config.showMax;
+        FPShudClient.maxPosition = config.maxPosition;
+        FPShudClient.maxPrecision = config.maxPrecision;
+        FPShudClient.beforeMax = config.beforeMax;
+        FPShudClient.afterMax = config.afterMax;
+        FPShudClient.maxUpdateInterval = config.maxUpdateInterval;
+
+        FPShudClient.showMin = config.showMin;
+        FPShudClient.minPosition = config.minPosition;
+        FPShudClient.minPrecision = config.minPrecision;
+        FPShudClient.beforeMin = config.beforeMin;
+        FPShudClient.afterMin = config.afterMin;
+        FPShudClient.minUpdateInterval = config.minUpdateInterval;
+
+        saveConfig();
     }
 
     public static void saveConfig() {
         Gson gson = new Gson();
         File configFile = configPath.toFile();
         Config currentConfig = new Config();
-        currentConfig.pollingRate = FPShudClient.getPollingRate();
-        currentConfig.mainUpdateInterval = FPShudClient.getMainUpdateInterval();
-        currentConfig.avrUpdateInterval = FPShudClient.getAvrUpdateInterval();
-        currentConfig.maxUpdateInterval = FPShudClient.getMaxUpdateInterval();
-        currentConfig.minUpdateInterval = FPShudClient.getMinUpdateInterval();
-        currentConfig.toggleHUD = FPShudClient.isToggleHUD();
-        currentConfig.xPos = FPShudClient.getXPos();
-        currentConfig.yPos = FPShudClient.getYPos();
-        currentConfig.textColor = FPShudClient.getTextColor();
-        currentConfig.shadow = FPShudClient.isShadow();
-        currentConfig.precision = FPShudClient.getPrecision();
-        currentConfig.showFps = FPShudClient.isShowFps();
-        currentConfig.showAvr = FPShudClient.isShowAvr();
-        currentConfig.showMax = FPShudClient.isShowMax();
-        currentConfig.showMin = FPShudClient.isShowMin();
-        currentConfig.beforeFps = FPShudClient.getBeforeFps();
-        currentConfig.afterFps = FPShudClient.getAfterFps();
-        currentConfig.beforeAvr = FPShudClient.getBeforeAvr();
-        currentConfig.afterAvr = FPShudClient.getAfterAvr();
-        currentConfig.beforeMax = FPShudClient.getBeforeMax();
-        currentConfig.afterMax = FPShudClient.getAfterMax();
-        currentConfig.beforeMin = FPShudClient.getBeforeMin();
-        currentConfig.afterMin = FPShudClient.getAfterMin();
-        currentConfig.separator = FPShudClient.getSeparator();
+
+        currentConfig.toggleHUD = FPShudClient.toggleHUD;
+        currentConfig.xPos = FPShudClient.xPos;
+        currentConfig.yPos = FPShudClient.yPos;
+        currentConfig.textColor = FPShudClient.textColor;
+        currentConfig.shadow = FPShudClient.shadow;
+        currentConfig.pollingRate = FPShudClient.pollingRate;
+
+        currentConfig.showFps = FPShudClient.showFps;
+        currentConfig.fpsPosition = FPShudClient.fpsPosition;
+        currentConfig.fpsPrecision = FPShudClient.fpsPrecision;
+        currentConfig.beforeFps = FPShudClient.beforeFps;
+        currentConfig.afterFps = FPShudClient.afterFps;
+        currentConfig.mainUpdateInterval = FPShudClient.mainUpdateInterval;
+
+        currentConfig.showAvr = FPShudClient.showAvr;
+        currentConfig.avrPosition = FPShudClient.avrPosition;
+        currentConfig.avrPrecision = FPShudClient.avrPrecision;
+        currentConfig.beforeAvr = FPShudClient.beforeAvr;
+        currentConfig.afterAvr = FPShudClient.afterAvr;
+        currentConfig.avrUpdateInterval = FPShudClient.avrUpdateInterval;
+
+        currentConfig.showMax = FPShudClient.showMax;
+        currentConfig.maxPosition = FPShudClient.maxPosition;
+        currentConfig.maxPrecision = FPShudClient.maxPrecision;
+        currentConfig.beforeMax = FPShudClient.beforeMax;
+        currentConfig.afterMax = FPShudClient.afterMax;
+        currentConfig.maxUpdateInterval = FPShudClient.maxUpdateInterval;
+
+        currentConfig.showMin = FPShudClient.showMin;
+        currentConfig.minPosition = FPShudClient.minPosition;
+        currentConfig.minPrecision = FPShudClient.minPrecision;
+        currentConfig.beforeMin = FPShudClient.beforeMin;
+        currentConfig.afterMin = FPShudClient.afterMin;
+        currentConfig.minUpdateInterval = FPShudClient.minUpdateInterval;
 
         try (FileWriter writer = new FileWriter(configFile)) {
             gson.toJson(currentConfig, writer);
