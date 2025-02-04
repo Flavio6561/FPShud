@@ -7,10 +7,16 @@
 	"authors": [
 		"Flavio6561"
 	],
-	"contact": {
-		"sources": "https://github.com/Flavio6561/FPShud",
-		"issues": "https://github.com/Flavio6561/FPShud/issues",
-		"homepage": "https://github.com/Flavio6561/FPShud"
+	"custom" : {
+		"fabric-renderer-api-v1:contains_renderer" : true,
+		"modmenu" : {
+			"links" : {
+				"GitHub": "https://github.com/Flavio6561/FPShud",
+				"Modrinth page": "https://modrinth.com/mod/fpshud",
+				"Changelogs" : "https://github.com/Flavio6561/FPShud/wiki/Version-changelogs",
+				"GitHub Issues": "https://github.com/Flavio6561/FPShud/issues"
+			}
+		}
 	},
 	"icon": "assets/fpshud/icon.png",
 	"environment": "*",

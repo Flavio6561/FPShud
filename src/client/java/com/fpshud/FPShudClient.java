@@ -95,9 +95,8 @@ public class FPShudClient implements ClientModInitializer {
 		}
 		if (lastPoll > pollingRate) {
 			double acc = 0;
-			for (double fps : fpsHistory) {
+			for (double fps : fpsHistory)
 				acc += fps;
-			}
 			mainFps = acc / fpsHistory.size();
 			fpsHistory.clear();
 			avrFpsHistory.add(mainFps);
@@ -128,7 +127,8 @@ public class FPShudClient implements ClientModInitializer {
 
 	public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
 		MinecraftClient client = MinecraftClient.getInstance();
-		if (toggleHUD) drawContext.drawText(client.textRenderer, getFullString(), xPos, yPos, textColor, shadow);
+		if (toggleHUD)
+			drawContext.drawText(client.textRenderer, getFullString(), xPos, yPos, textColor, shadow);
 	}
 
 	public String getFullString() {
@@ -145,9 +145,8 @@ public class FPShudClient implements ClientModInitializer {
 
 		StringBuilder fpsDisplay = new StringBuilder();
 		for (String component : components) {
-			if (component != null) {
+			if (component != null)
 				fpsDisplay.append(component);
-			}
 		}
 
 		return fpsDisplay.toString();
