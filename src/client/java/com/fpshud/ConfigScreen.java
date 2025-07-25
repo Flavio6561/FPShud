@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 
 import java.util.Optional;
 
-public class ModConfigScreen {
+public class ConfigScreen {
     public static Screen getConfigScreen(Screen parent) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
@@ -57,7 +57,8 @@ public class ModConfigScreen {
                     try {
                         FPShudClient.textColor = Integer.parseInt(newValue.replace("#", ""), 16);
                         ConfigManager.saveConfig();
-                    } catch (NumberFormatException ignored) {}
+                    } catch (NumberFormatException ignored) {
+                    }
                 })
                 .setTooltip(Text.translatable("tooltip.fpshud.textColor"))
                 .setErrorSupplier(newValue -> {
@@ -176,7 +177,7 @@ public class ModConfigScreen {
         avrDisplayOptions.addEntry(avrPositionBuilder.build());
 
         IntSliderBuilder avrPrecisionBuilder = builder.entryBuilder()
-                .startIntSlider(Text.translatable("option.fpshud.avrPrecision"), FPShudClient.avrPrecision, 0 ,4)
+                .startIntSlider(Text.translatable("option.fpshud.avrPrecision"), FPShudClient.avrPrecision, 0, 4)
                 .setDefaultValue(0)
                 .setSaveConsumer(newValue -> {
                     FPShudClient.avrPrecision = newValue;
@@ -240,7 +241,7 @@ public class ModConfigScreen {
         maxDisplayOptions.addEntry(maxPositionBuilder.build());
 
         IntSliderBuilder maxPrecisionBuilder = builder.entryBuilder()
-                .startIntSlider(Text.translatable("option.fpshud.maxPrecision"), FPShudClient.maxPrecision, 0 ,4)
+                .startIntSlider(Text.translatable("option.fpshud.maxPrecision"), FPShudClient.maxPrecision, 0, 4)
                 .setDefaultValue(0)
                 .setSaveConsumer(newValue -> {
                     FPShudClient.maxPrecision = newValue;
@@ -304,7 +305,7 @@ public class ModConfigScreen {
         minDisplayOptions.addEntry(minPositionBuilder.build());
 
         IntSliderBuilder minPrecisionBuilder = builder.entryBuilder()
-                .startIntSlider(Text.translatable("option.fpshud.minPrecision"), FPShudClient.minPrecision, 0 ,4)
+                .startIntSlider(Text.translatable("option.fpshud.minPrecision"), FPShudClient.minPrecision, 0, 4)
                 .setDefaultValue(0)
                 .setSaveConsumer(newValue -> {
                     FPShudClient.minPrecision = newValue;

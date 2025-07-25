@@ -7,8 +7,12 @@
 	"authors": [
 		"Flavio6561"
 	],
+	"license": "GPL-3.0",
+	"contact": {
+		"issues": "https://github.com/Flavio6561/FPShud/issues",
+		"homepage": "https://github.com/Flavio6561/FPShud"
+	},
 	"custom" : {
-		"fabric-renderer-api-v1:contains_renderer" : true,
 		"modmenu" : {
 			"links" : {
 				"GitHub": "https://github.com/Flavio6561/FPShud",
@@ -19,17 +23,16 @@
 		}
 	},
 	"icon": "assets/fpshud/icon.png",
-	"environment": "*",
 	"entrypoints": {
 		"client": [
 			"com.fpshud.FPShudClient"
 		],
 		"modmenu": [
-			"com.fpshud.ModMenuIntegration"
+			"com.fpshud.modmenu.ModMenuIntegration"
 		]
 	},
 	"depends": {
-		"fabricloader": ">=0.16.9",
+		"fabricloader": ">=0.16.14",
 		"minecraft": "~1.21",
 		"java": ">=21",
 		"fabric-api": "*"

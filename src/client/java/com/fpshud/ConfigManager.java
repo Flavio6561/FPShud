@@ -48,7 +48,7 @@ public class ConfigManager {
         int minUpdateInterval;
     }
 
-    public static void loadConfig() {
+    protected static void loadConfig() {
         Gson gson = new Gson();
         File configFile = configPath.toFile();
         if (configFile.exists()) {
@@ -144,7 +144,7 @@ public class ConfigManager {
         saveConfig();
     }
 
-    public static void saveConfig() {
+    protected static void saveConfig() {
         Gson gson = new Gson();
         File configFile = configPath.toFile();
         Config currentConfig = new Config();
