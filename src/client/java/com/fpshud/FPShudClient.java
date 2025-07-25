@@ -1,12 +1,13 @@
 package com.fpshud;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderTickCounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 
 import java.util.LinkedList;
 
@@ -67,8 +68,8 @@ public class FPShudClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ConfigManager.loadConfig();
+        HudRenderCallback.EVENT.register(this::onHudRender);
         WorldRenderEvents.END.register(context -> updateFps());
-        HudElementRegistry.addLast(Identifier.of("fpshud", "hud"), (context, tickCounter) -> context.drawText(MinecraftClient.getInstance().textRenderer, getFullString(), xPos, yPos, (0xff000000 | textColor & 0x00ffffff), shadow));
         LOGGER.info("FPShud initialized");
     }
 
@@ -123,9 +124,13 @@ public class FPShudClient implements ClientModInitializer {
         }
     }
 
-    private static String getFullString() {
-        if (!toggleHUD || MinecraftClient.getInstance().currentScreen != null) return "";
+    public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (toggleHUD)
+            drawContext.drawText(client.textRenderer, getFullString(), xPos, yPos, textColor, shadow);
+    }
 
+    public String getFullString() {
         String[] components = new String[4];
 
         if (showFps)
