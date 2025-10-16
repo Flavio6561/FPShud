@@ -67,12 +67,11 @@ public class FPShudClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ConfigManager.loadConfig();
-        WorldRenderEvents.END.register(context -> updateFps());
         HudElementRegistry.addLast(Identifier.of("fpshud", "hud"), (context, tickCounter) -> context.drawText(MinecraftClient.getInstance().textRenderer, getFullString(), xPos, yPos, (0xff000000 | textColor & 0x00ffffff), shadow));
         LOGGER.info("FPShud initialized");
     }
 
-    private static void updateFps() {
+    public static void updateFps() {
         long currentTime = System.nanoTime();
         long deltaTime = currentTime - lastFrameTime;
         lastFrameTime = currentTime;
