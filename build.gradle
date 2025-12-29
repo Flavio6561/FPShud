@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version "${loom_version}"
 	id 'maven-publish'
+    id "com.modrinth.minotaur" version "2.8.10"
 }
 
 version = project.mod_version
@@ -53,3 +54,23 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
 }
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "2iH7sx2j"
+    versionNumber = "${project.version}"
+    versionName = "FPS hud ${project.version}"
+    changelog = "[Version ${project.version}](https://github.com/Flavio6561/FPShud/wiki/Version-changelogs)"
+    uploadFile = remapJar
+    versionType = "release"
+    gameVersions = ["1.21.9", "1.21.10", "1.21.11"]
+    loaders = ["fabric", "quilt"]
+
+    dependencies {
+        required.project "P7dR8mSH"
+        optional.project "mOgUt4GM"
+        optional.project "9s6osm5g"
+    }
+}
+
+tasks.modrinth.dependsOn(tasks.remapJar)
